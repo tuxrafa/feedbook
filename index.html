@@ -176,12 +176,12 @@ if('serviceWorker' in navigator) {
 					}
           $("#post-" + pid + " .postpic").attr("alt", data[keys[i]].title);
           $("#post-" + pid + "").attr("onclick", "getArticle('"+data[keys[i]].slug+"', '"+data[keys[i]].guid+"', '"+data[keys[i]].disqus+"')");
-          $("#post-" + pid + " .pagepic").attr("src", "../"+data[keys[i]].pagepic);
+          $("#post-" + pid + " .pagepic").attr("src", ""+data[keys[i]].pagepic);
 					
 					if (data[keys[i]].pagepic == "pagepic") {
 					  $("#post-" + pid + " .pagepic").attr("src", "");
 					} else {
-						$("#post-" + pid + " .pagepic").attr("src", "../"+data[keys[i]].pagepic);
+						$("#post-" + pid + " .pagepic").attr("src", ""+data[keys[i]].pagepic);
 					}
 					
           $("#post-" + pid + " .pagename").text(data[keys[i]].page);
