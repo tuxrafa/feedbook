@@ -1,0 +1,234 @@
+<html>
+<head>
+	<meta name="theme-color" content="#234470">
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width">
+  <title>Feedbook</title>
+  <meta name="description" content="RSS Feed Timeline">
+	<link rel="shortcut icon" href="res/img/feedbook4.png" type="image/x-icon"/>
+  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Proza+Libre" rel="stylesheet">
+	<link rel="stylesheet" href="res/css/font-awesome.min.css">
+  <link href="res/css/css.css" rel="stylesheet">
+<script>
+if('serviceWorker' in navigator) {
+  navigator.serviceWorker
+           .register('res/js/sw.js')
+           .then(function() { console.log("Service Worker Registered"); });
+}
+</script>
+</head>
+
+<body>
+  <div id="overlay">
+    <div id="vanderlay">
+      <div class='uil-ring-css' style='transform:scale(0.6);'><div></div></div>
+    </div>
+  </div>
+	<header>
+		<nav class="menu">
+			<span id="showsidebar" onclick='$("nav.sidebar").toggleClass("active");'><i class="fa fa-list" aria-hidden="true"></i></span>
+			<ul id="left">
+				<li><a id="home" onclick="getFeeds(false); getPages();"><b>Feedbook</b></a></li>
+				<li><input id="search"/></li>
+			</ul>
+			<ul id="right">
+				<li>menu</li>
+				<li>menu</li>
+			</ul>
+			<span id="showclose" onclick='$("article").removeClass("active");$("#showclose").removeClass("active");'><i class="fa fa-times" aria-hidden="true"></i></span>
+		</nav>
+	</header>
+		<nav class="sidebar">
+			<ul>
+			</ul>
+		</nav>
+		<section>Carregando...</section>
+		<article>
+			<div class="card">
+        <div class="content">Selecione um artigo ao lado.</div>
+        <div class="comment">
+					<div id="disqus_thread"></div>
+        </div>
+			</div>
+		</article>
+		<footer>
+		<img src="https://fastforwardbr.com.br/labs/feedbook/client/res/img/feedbook4.png" align="center" width="50px">
+		</footer>
+		
+  <div id="warehouse">
+    <ul>
+      <li id="feed-x"><a onclick="getFeeds(true, this)" href="#">Feed Um</a></li>
+    </ul>
+		
+    <div class="card" id="post-x">
+      <div class="post">
+
+        <div class="article-content">
+
+          <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="postpic" class="postpic">
+
+          <div class="pagepic-col">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="pagepic" class="pagepic">
+          </div>
+          <div class="pagename-col">
+            <h5 class="pagename">Page Title</h5>
+            <span class="postdate">22/22/22</span> - <span class="postauthor">22/22/22</span>
+          </div>
+					
+            <h4 class="posttitle">Post Title</h4>
+
+            <p class="postdescription">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+              irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+  <script>
+    function getPages() {
+      $.get("https://fastforwardbr.com.br/labs/feedbook/api/?feed=names_", function(data) {
+        console.log(data);
+        $('nav.sidebar').empty();
+        $.each(data, function(fid, pdata) {
+          $("#feed-x").clone().appendTo("nav.sidebar").prop('id', 'feed-' + fid);
+          $("#feed-" + fid + " a").attr("href", "#" + pdata.slug);
+          $("#feed-" + fid + " a").attr("style", "background-image: url('" + pdata.pagepic+"')");
+          $("#feed-" + fid + " a").text(pdata.pagename);
+          //console.log(v);
+        });
+      });
+    }
+    // feed=meiobit&pid=a1251c13e7280e20e540ab9324dc97cb
+    var disqus_shortname;
+    function getArticle($page, $pid, $disqus) {
+      $("article .card .content").empty();
+      $("article .card .content").scrollTop = 0;
+      $("#disqus_thread").empty();
+      disqus_shortname = "";
+      $.get("https://fastforwardbr.com.br/labs/feedbook/api/?feed="+$page+"&pid="+$pid, function(data) {
+        $.each(data, function(fid, pdata) {
+					$("article").toggleClass("active");
+					$("#showclose").toggleClass("active");
+					location.hash="reader";
+					pdata.content.replace("<script>","<script-ignore>")
+          $("article .card .content").html(pdata.content);
+          $("article .card .content").prepend("<h1>"+pdata.title+"</h1>");
+					//$('article .card .content style').remove();
+					$('article .card .content script').remove();
+          if ($disqus != "") {
+            console.log(pdata.link);
+            window.disqus_config = function () {
+              this.page.url = pdata.link;
+			       //  this.page.url = 'https://meiobit.com/365769/projeto-no-kickstarter-quer-produzir-um-filtro-nd-polarizador/';
+             };
+
+            disqus_shortname = $disqus; // Replace this value with *your* username.
+            $.ajax({
+              type: "GET",
+              url: "https://" + disqus_shortname + ".disqus.com/embed.js",
+              dataType: "script",
+              cache: true
+            });
+          }
+        });
+      });
+    }
+
+    function getFeeds(filter, obj) {
+      showLoad();
+			$("nav.sidebar li").removeClass("active");
+			$("nav.sidebar").removeClass("active");
+			$("article").removeClass("active");
+			$("#showclose").removeClass("active");
+      if (filter == true) {
+				if (typeof obj != "string") {
+					var feed = $(obj).attr('href').replace("#", "");
+				} else {
+					var feed = obj;
+				}
+				$("li a[href='#"+feed+"']").parent("li").addClass("active")
+        var url = "https://fastforwardbr.com.br/labs/feedbook/api/?feed=" + feed;
+      } else {
+				history.pushState("", document.title, window.location.pathname);
+        var url = "https://fastforwardbr.com.br/labs/feedbook/api/";
+      }
+      $.get(url, function(data) {
+        $("section").html("");
+				
+        //$.each(data, function(pid, pdata) {
+				var keys = Object.keys(data).reverse();
+
+				for(i=0; i< keys.length; i++) {
+				pid = keys[i];
+        //console.log( pid );
+          $("#post-x").clone().appendTo("section").prop('id', 'post-' + pid);
+					if (data[keys[i]].thumbnail == "-") {
+						$("#post-" + pid + " .postpic").addClass("noimage");
+						$("#post-" + pid + " .postpic").attr("src", "");
+					} else {
+					  $("#post-" + pid + " .postpic").attr("src", data[keys[i]].thumbnail);
+					}
+          $("#post-" + pid + " .postpic").attr("alt", data[keys[i]].title);
+          $("#post-" + pid + "").attr("onclick", "getArticle('"+data[keys[i]].slug+"', '"+data[keys[i]].guid+"', '"+data[keys[i]].disqus+"')");
+          $("#post-" + pid + " .pagepic").attr("src", "../"+data[keys[i]].pagepic);
+					
+					if (data[keys[i]].pagepic == "pagepic") {
+					  $("#post-" + pid + " .pagepic").attr("src", "");
+					} else {
+						$("#post-" + pid + " .pagepic").attr("src", "../"+data[keys[i]].pagepic);
+					}
+					
+          $("#post-" + pid + " .pagename").text(data[keys[i]].page);
+          $("#post-" + pid + " .pagename").text(data[keys[i]].page);
+          $("#post-" + pid + " .postdescription").text(data[keys[i]].description);
+          $("#post-" + pid + " .postdate").text(data[keys[i]].pubDate);
+          $("#post-" + pid + " .postauthor").text(data[keys[i]].author);
+          $("#post-" + pid + " .posttitle").text(data[keys[i]].title);
+          $("#post-" + pid + " .postdescription").text(data[keys[i]].description);
+					
+
+          //console.log(v);
+        };
+
+        hideLoad();
+      });
+    }
+
+    function showLoad() {
+      $("#overlay").show();
+    }
+
+    function hideLoad() {
+      $("#overlay").hide();
+    }
+		
+		$(window).on('hashchange', function() {
+			if ((window.location.hash != "#reader") && (window.location.hash != "#main") && (window.location.hash != "#content")) {
+				$("article").removeClass("active");
+				$("#showclose").removeClass("active");
+			}
+			if ((window.location.hash) && (window.location.hash == "#content")) {
+					location.hash="reader";
+			}
+		});
+		
+		if ((window.location.hash) && (window.location.hash != "#reader") && (window.location.hash != "#content")) {
+			var $filter = true;
+			var $feed = window.location.hash.substring(1);
+		} else {
+      var $filter = false;
+      var $feed = null;
+		}
+		console.log($filter);
+    getFeeds($filter, $feed);
+    getPages();
+
+
+  </script>
+</html>

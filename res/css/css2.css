@@ -1,0 +1,432 @@
+
+div#overlay {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100%;
+    z-index: 990;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+@-webkit-keyframes uil-ring-anim {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes uil-ring-anim {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes uil-ring-anim {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes uil-ring-anim {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes uil-ring-anim {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+div#vanderlay {
+    margin: -100px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+}
+
+.uil-ring-css {
+  background: none;
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+.uil-ring-css > div {
+  position: absolute;
+  display: block;
+  width: 160px;
+  height: 160px;
+  top: 20px;
+  left: 20px;
+  border-radius: 80px;
+  box-shadow: 0 3px 0 0 #59ebff;
+  -webkit-transform-origin: 80px 81.5px;
+  transform-origin: 80px 81.5px;
+  -webkit-animation: uil-ring-anim 1s linear infinite;
+  animation: uil-ring-anim 1s linear infinite;
+}
+
+
+#warehouse {
+    display: none;
+}
+
+body {
+    margin: 0;
+    font-family: 'Proza Libre', sans-serif !important;
+    display: grid;
+    grid-template-columns: 60px 200px 400px auto 20px;
+    grid-template-rows: 50px auto 100px;
+    height: 100vh;
+    overflow: hidden;
+    background: #eeeeee !important;
+}
+
+header {
+    grid-area: 1/1/2/6;
+    text-shadow: 0px 0px 1px black;
+    color: white !important;
+    background: #234470;
+    padding: 10px 55px;
+    font-size: 20px;
+    z-index: 5;
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 0px 4px, rgba(0, 0, 0, 0.28) 0px 4px 8px;
+}
+
+header ul {
+    list-style-type: none;
+    margin: -3px 0 0px 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+header ul#right {
+	display: none;
+    float: right;
+    width: 100px;
+}
+
+header ul#left {
+    float: left;
+}
+
+header ul li {
+    display: inline;
+    cursor: pointer;
+    float: left;
+}
+
+header ul li a {
+    color: white !important;
+}
+
+header nav input#search {
+	display: none;
+    background: rgba(255,255,255,.15);
+    border: 0;
+    border-radius: 2px;
+    min-width: 144px;
+    max-width: 100%;
+    width: 100%;
+    float: left;
+    margin: 0 0 0 10px;
+}
+
+
+nav.sidebar {
+    grid-area: 2/2/3/3;
+    overflow: auto;
+    padding: 20px 0;
+    margin-left: -10px;
+}
+
+nav.sidebar li {
+    display: block;
+    border: 1px solid transparent;
+    padding: 5px 5px 5px;
+}
+
+nav.sidebar li a {
+    text-decoration: none;
+    color: #06192a;
+    font-size: 14px;
+    line-height: 1.5em;
+    width: 100%;
+    padding: 5px 5px 5px 18px;
+    background-image: url("http://fastforwardbr.com.br/labs/feedbook/res/img/feedbook4.png");
+    background-size: 14px;
+    background-position: 0px 40%;
+    background-repeat: no-repeat;
+}
+
+nav.sidebar li:hover {
+	color: #eeeeee;
+	cursor: pointer;
+    font-weight: bold;
+}
+
+nav.sidebar li.active {
+    background-color: #f6f7f9;
+    border: 1px solid #dddfe2;
+    border-radius: 2px;
+}
+
+span#showsidebar {
+	display: none;
+}
+
+section {
+    grid-area: 2/3/4/4;
+    overflow: auto;
+}
+
+section::-webkit-scrollbar { 
+    display: none; 
+}
+
+section .card {
+    background: white;
+    padding: 0;
+    margin: 15px 10px 30px 10px !important;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 0px 4px, rgba(0, 0, 0, 0.28) 0px 4px 8px;
+}
+
+section .card img {
+    max-width: 100%;
+}
+
+section .card h1,
+section .card h4 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 20px;
+    line-height: 26px;
+    padding: 0 1rem;
+    clear: both;
+    margin-top: 15px;
+}
+
+section .card p {
+    padding: 0 1rem;
+    font-size: 14px;
+    line-height: 20px;
+    padding-bottom: 10px;
+}
+
+section .card img.pagepic {
+    max-width: 70px;
+    box-shadow: 0px 0px 10px 0px #333;
+    background: #fff !important;
+}
+
+.pagepic-col {
+    width: 70px;
+    height: 70px;
+    float: left;
+    margin: -20px 15px 0 15px;
+    z-index: 9999;
+}
+
+section .card h5.pagename {
+    /* float: left; */
+    color: #14171a;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 0 -15px 90px !important;
+    line-height: 40px;
+}
+
+section .card .postdate,
+section .card .postauthor {
+    margin: 0;
+    font-size: 10px;
+    color: #777;
+} 
+
+section .card .postpic {
+    text-align: left;
+    font-size: 26px;
+    line-height: 30px;
+    font-weight: bold;
+    font-style: italic;
+    text-transform: uppercase;
+    color: white;
+    background: #162f46;
+    background: linear-gradient(135deg, #162f46 0%,#244572 100%);
+    border-bottom: 1px solid #c8c8c8;
+    float: left;
+}
+
+section .card .postpic.noimage {
+    padding: 1em;
+    width: auto;
+}
+
+article {
+    grid-area: 2/4/4/5;
+    overflow: auto;
+    background: white;
+    padding: 15px;
+    margin: 15px 10px 10px 10px !important;
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 0px 4px, rgba(0, 0, 0, 0.28) 0px 4px 8px;
+}
+
+article .card h1 {
+    font-family: 'Libre Baskerville', serif;
+    padding: 10px 30px;
+    font-size: 22px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+
+article .card * {
+    max-width: 100%;
+}
+
+article .card img {
+    height: auto;
+}
+
+article .card p {
+    font-size: 14px;
+    line-height: 1.5em;
+}
+
+footer {
+	
+    grid-area: 3/2/4/3;
+    overflow: auto;
+}
+
+
+span#showclose {
+    display: none;
+}
+
+@media (max-width : 768px) { 
+body {
+    display: block;
+    overflow: visible;
+    padding-top: 35px;
+}
+
+header {
+    height: 20px;
+    padding: 10px 15px 10px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+nav.sidebar {
+    position: fixed;
+    width: 90vw;
+    height: 100vh;
+    background: #eeeeee;
+    box-shadow: rgba(0, 0, 0, 0.72) 1px 0px 13px 0px, rgba(0, 0, 0, 0.63) 0px 4px 8px;
+    left: -100vw;
+}
+
+nav.sidebar.active {
+    left: 0;
+}
+
+nav.sidebar li {
+    margin: 0 0 0 30px !important;
+    height: 30px;
+}
+
+nav.sidebar li a {
+    background-size: 25px;
+    padding-left: 30px;
+    font-size: 16px;
+}
+
+img.postpic {
+    width: 100%;
+}
+
+article.active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: block;
+		height: 100vh;
+}
+
+
+span#showclose.active {
+    display: block;
+    float: right;
+    margin-right: 35px;
+}
+
+article {
+    display: none;
+}
+footer {
+    width: 100%;
+}
+
+section {
+    width: 100vw;
+}
+
+section .card {
+    margin: 15px auto !important;
+    overflow: hidden;
+}
+
+span#showsidebar {
+	display: block;
+    float: left;
+}
+
+header nav.menu:after {
+    /* clear: both; */
+    /* content: " "; */
+    /* display: block; */
+    /* width: 100%; */
+    /* height: 1px; */
+    float: none;
+}
+
+header nav.menu {
+    width: 100%;
+    height: 100%;
+}
+
+header ul#left {
+    margin-left: 10px;
+}
+
+footer {
+  text-align: center;
+}
+
+}
