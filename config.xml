@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns   = "http://www.w3.org/ns/widgets"
+    xmlns:gap   = "http://phonegap.com/ns/1.0"
+    id          = "com.fastforwardbr.feedbook"
+    versionCode = "10"
+    version     = "1.0.0" >
+
+<!-- versionCode is optional and Android only -->
+
+  <name>Feedbook</name>
+
+  <description>
+      RSS Timeline Feed
+  </description>
+
+  <author href="fastforwardbr.com.br/labs/feedbook" email="rafael@fastforwardbr.com.br">
+      Rafael Honjaccoofher
+  </author>
+
+</widget>
